@@ -5,7 +5,7 @@ import Profile from "../../../Img/profileImg.jpg";
 import "./ProfileCard.css";
 
 const ProfileCard = () => {
-	const ProfilePage = false;
+	const ProfilePage = true;
 
 	return (
 		<Card className="ProfileCard mt-2">
@@ -26,12 +26,25 @@ const ProfileCard = () => {
 							<span>1</span>
 							<span>Followers</span>
 						</div>
+						{ProfilePage && (
+							<>
+								<div className="vl"> </div>
+								<div className="follow">
+									<span>3</span>
+									<span>Post</span>
+								</div>
+							</>
+						)}
 					</div>
 					<hr />
 				</div>
-                <div className="d-flex justify-content-center">
-                    {ProfilePage ? "" : <button className="button fc-button">My Profile</button>}
-                </div>
+				<div className="d-flex justify-content-center">
+					{ProfilePage ? (
+						""
+					) : (
+						<button className="button fc-button">My Profile</button>
+					)}
+				</div>
 			</CardBody>
 		</Card>
 
