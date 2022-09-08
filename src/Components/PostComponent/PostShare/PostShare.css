@@ -1,0 +1,36 @@
+.PostShare {
+	background-color: var(--cardColor);
+	padding: 1rem;
+	border-radius: 1rem;
+	max-height: 70vh;
+	overflow: scroll;
+}
+
+.p-image > img {
+	border-radius: 50%;
+	width: 3rem;
+	height: 3rem;
+}
+.inputs > input {
+	background-color: var(--inputColor);
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 14px;
+    width: 100%;
+	border: none;
+	outline: none;
+}
+.previewImage{
+	width: 100%;
+}
+.previewImage>img{
+	width: 100%;
+}
+.previewImage > svg {
+	position: absolute;
+    right: -0.05rem;
+    top: -0.2rem;
+    cursor: pointer;
+    background: var(--lightblue);
+    border-radius: 50%;
+}
