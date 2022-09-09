@@ -1,14 +1,23 @@
 import { UilPen } from "@iconscout/react-unicons";
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "reactstrap";
 import "./ProfileInfo.css";
+import ProfileModal from "./ProfileModal";
 
 const ProfileInfo = () => {
+	const [modal, setModal] = useState(false);
+	const toggle = () => setModal(!modal);
 	return (
 		<Card className="ProfileInfo mt-2">
 			<div className="d-flex justify-content-between">
 				<h4>Your Info</h4>
-				<UilPen width="2rem" height="1.2rem" />
+				<UilPen
+					width="2rem"
+					height="1.2rem"
+					style={{ cursor: "pointer" }}
+					onClick={toggle}
+				/>
+				<ProfileModal modal={modal} toggle={toggle} />
 			</div>
 
 			<div className="info">
