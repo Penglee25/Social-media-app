@@ -1,0 +1,15 @@
+.Auth {
+	background-color: var(--cardColor);
+	padding: 1rem;
+	border-radius: 1rem;
+}
+.signup{
+    font-size: 14px;
+    height: 2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.loadingSpinner{
+    pos
+}
