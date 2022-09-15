@@ -1,1 +1,0 @@
-const authReducer = (state = { authData = null, loading: false, })
