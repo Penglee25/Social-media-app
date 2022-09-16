@@ -1,6 +1,6 @@
-import * as PostsApi from "../api/PostsRequests";
+import * as PostsApi from "../Api/PostsRequests";
 
-export const getTimelinePosts = (id) => async (dispatch) => {
+export const getTimelinePost = (id) => async (dispatch) => {
   dispatch({ type: "RETREIVING_START" });
   try {
     const { data } = await PostsApi.getTimelinePosts(id);

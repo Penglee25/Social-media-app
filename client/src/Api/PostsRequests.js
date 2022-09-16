@@ -12,6 +12,6 @@ API.interceptors.request.use((req) => {
 	return req;
 });
 
-export const getTimelinePosts = (id) => API.get(`/posts/${id}/timeline`);
+export const getTimelinePosts = (id) => API.get(`/post/${id}/timeline`);
 export const likePost = (id, userId) =>
-	API.put(`posts/${id}/like`, { userId: userId });
+	API.put(`post/${id}/like`, { userId: userId });
