@@ -1,36 +1,75 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
-import Cover from "../../../Img/cover.jpg";
-import Profile from "../../../Img/profileImg.jpg";
+import Spinners from "../../../Pages/Spinner/Spinners";
 import "./ProfileCard.css";
 
-const ProfileCard = () => {
-	const ProfilePage = true;
+const ProfileCard = ({ location }) => {
+	const { user } = useSelector((state) => state.authReducers.authData);
+	const posts = useSelector((state) => state.postReducer.posts);
+	const _PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+	const loading = useSelector((state) => state.authReducers.updateLoading);
+
+	const ProfilePage = false;
 
 	return (
 		<Card className="ProfileCard mt-2">
+			{loading && <Spinners />}
 			<div className="ProfileImage">
-				<img src={Cover} alt="" />
-				<img src={Profile} alt="" />
+				<img
+					src={
+						user.coverPicture
+							? _PUBLIC_FOLDER + user.coverPicture
+							: _PUBLIC_FOLDER + "cover.jpg"
+					}
+					alt=""
+				/>
+				<img
+					src={
+						user.profilePicture
+							? _PUBLIC_FOLDER + user.profilePicture
+							: _PUBLIC_FOLDER + "avatar.png"
+					}
+					alt=""
+				/>
 			</div>
 			<CardBody className="mt-3 text-center">
+				<span
+					className="username"
+					style={{ fontWeight: "bold", fontSize: "15px" }}
+				>
+					<p className="mb-0">
+						{user.firstname} {user.lastname}
+					</p>
+				</span>
+				<span className="occupation" style={{ fontSize: "12px" }}>
+					{user.workAt ? user.workAt : "Write bio"}
+				</span>
 				<div className="followStatus">
 					<hr />
 					<div>
 						<div className="follow">
-							<span>6,809</span>
+							<span>{user.following.length}</span>
 							<span>Followings</span>
 						</div>
 						<div className="vl"></div>
 						<div className="follow">
-							<span>1</span>
+							<span>{user.followers.length}</span>
 							<span>Followers</span>
 						</div>
-						{ProfilePage && (
+						{location !== "profilePage" && (
 							<>
 								<div className="vl"> </div>
 								<div className="follow">
-									<span>3</span>
+									<span>
+										{
+											posts.filter(
+												(post) =>
+													post.userId === user._id
+											).length
+										}
+									</span>
 									<span>Post</span>
 								</div>
 							</>
@@ -39,54 +78,24 @@ const ProfileCard = () => {
 					<hr />
 				</div>
 				<div className="d-flex justify-content-center">
-					{ProfilePage ? (
+					{location !== "profilePage" ? (
 						""
 					) : (
-						<button className="button fc-button">My Profile</button>
+						<button className="button fc-button">
+							<Link
+								style={{
+									textDecoration: "none",
+									color: "inherit",
+								}}
+								to={`/profile/${user._id}`}
+							>
+								My Profile
+							</Link>
+						</button>
 					)}
 				</div>
 			</CardBody>
 		</Card>
-
-		// <div className="ProfileCard">
-		// 	<div className="ProfileImage">
-		// 		<img src={Cover} alt="" />
-		// 		<img src={Profile} alt="" />
-		// 	</div>
-
-		// 	<div className="ProfileName">
-		// 		<span>Zanya Lopez</span>
-		// 		<span>Fashion Model | GMA Artist</span>
-		// 	</div>
-
-		// 	<div className="followStatus">
-		// 		<hr />
-		// 		<div>
-		// 			<div className="follow">
-		// 				<span>6,809</span>
-		// 				<span>Followings</span>
-		// 			</div>
-		// 			<div className="vl"></div>
-		// 			<div className="follow">
-		// 				<span>1</span>
-		// 				<span>Followers</span>
-		// 			</div>
-
-		// 			{ProfilePage && (
-		// 				<>
-		// 					<div className="vl"> </div>
-		// 					<div className="follow">
-		// 						<span>3</span>
-		// 						<span>Post</span>
-		// 					</div>
-		// 				</>
-		// 			)}
-		// 		</div>
-		// 		<hr />
-		// 	</div>
-
-		// 	{ProfilePage ? "" : <span>My Profile</span>}
-		// </div>
 	);
 };
 

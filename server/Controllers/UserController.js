@@ -1,8 +1,6 @@
 import bcrypt from "bcrypt";
-import {
-	default as userModel,
-	default as UserModel
-} from "../Models/userModel.js";
+import jwt from "jsonwebtoken";
+import UserModel from "../Models/userModel.js";
 
 // get a User
 export const getUser = async (req, res) => {
@@ -25,18 +23,25 @@ export const getUser = async (req, res) => {
 // Update a User
 export const updateUser = async (req, res) => {
 	const id = req.params.id;
-	const { currentUserId, currentUserAdminStatus, password } = req.body;
+	// console.log("Data id", id)
+	// console.log("Data Received", req.body)
+	const { _id, isAdmin, password } = req.body;
 
-	if (id === currentUserId || currentUserAdminStatus) {
+	if (id === _id) {
 		try {
 			if (password) {
 				const salt = await bcrypt.genSalt(10);
 				req.body.password = await bcrypt.hash(password, salt);
 			}
-			const user = await UserModel.findByIdAndUpdate(id, req.body, {
+			const user = await UserModel.findByIdAndUpdate(_id, req.body, {
 				new: true,
 			});
-			res.status(200).json(user);
+			const token = jwt.sign(
+				{ username: user.username, id: user._id },
+				process.env.JWT_KEY,
+				{ expiresIn: "1h" }
+			);
+			res.status(200).json({user, token});
 		} catch (error) {
 			res.status(500).json(error);
 		}
@@ -56,7 +61,7 @@ export const deleteUser = async (req, res) => {
 
 	if (id === currentUserId || currentUserAdminStatus) {
 		try {
-			await userModel.findByIdAndDelete(id);
+			await UserModel.findByIdAndDelete(id);
 			res.status(200).json("user deleted successfully");
 		} catch (error) {
 			res.status(500).json(error);
@@ -77,8 +82,8 @@ export const followUser = async (req, res) => {
 		res.status(403).json("Action forbidden");
 	} else {
 		try {
-			const followersUser = await userModel.findById(id);
-			const followingUser = await userModel.findById(currentUserId);
+			const followersUser = await UserModel.findById(id);
+			const followingUser = await UserModel.findById(currentUserId);
 
 			if (!followersUser.followers.includes(currentUserId)) {
 				await followersUser.updateOne({
@@ -104,8 +109,8 @@ export const unFollowUser = async (req, res) => {
 		res.status(403).json("Action forbidden");
 	} else {
 		try {
-			const followersUser = await userModel.findById(id);
-			const followingUser = await userModel.findById(currentUserId);
+			const followersUser = await UserModel.findById(id);
+			const followingUser = await UserModel.findById(currentUserId);
 
 			if (!followersUser.followers.includes(currentUserId)) {
 				await followersUser.updateOne({

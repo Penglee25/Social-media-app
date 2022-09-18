@@ -20,6 +20,7 @@ const PostShare = () => {
 	const { user } = useSelector((state) => state.authReducers.authData);
 	const desc = useRef();
 	const loading = useSelector((state) => state.postReducer.uploading);
+	const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
 
 	const onImageChange = (event) => {
 		if (event.target.files && event.target.files[0]) {
@@ -61,7 +62,7 @@ const PostShare = () => {
 		{loading && <Spinners/>}
 			<div className="row">
 				<div className="col-auto p-image pr-0 ">
-					<img src={ProfileImage} alt="" />
+					<img src={user.profilePicture ? serverPublic + user.profilePicture : serverPublic + "avatar.png"} alt="" />
 				</div>
 				<div className="col inputs">
 					<input
