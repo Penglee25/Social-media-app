@@ -1,39 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Card, CardBody } from "reactstrap";
-import { Followers } from "../../../Data/FollowersData";
+import { getAllUser } from "../../../Api/UserRequest";
+import User from "../Users/User";
 import "./FollowersCard.css";
 
 const FollowerCard = () => {
+	const [persons, setPersons] = useState([]);
+	const { user } = useSelector((state) => state.authReducers.authData);
+
+	useEffect(() => {
+		const fetchPerson = async() => {
+			const {data} = await getAllUser();
+			setPersons(data);
+		}
+		fetchPerson();
+	},[])
+
 	return (
 		<div className="FollowersCard mt-2">
 			<Card className="ProfileCard">
 				<CardBody>
-					<span className="text-secondary">Who is following you</span>
-					{Followers.map((followers, id) => {
-						return (
-							<div className="followers mt-1">
-								<div className="row">
-									<div className="col-auto p-1">
-										<img
-											src={followers.img}
-											className="followerImg"
-											alt=""
-										/>
-									</div>
-									<div className="col pl-1 mx-0">
-										<div className="name">
-											<span>{followers.name}</span>
-											<span>@{followers.username}</span>
-										</div>
-									</div>
-									<div className="col-4">
-										<button className="button fc-button mt-2">
-											Follow
-										</button>
-									</div>
-								</div>
-							</div>
-						);
+					<span className="text-secondary">People you may know</span>
+					{persons.map((person, id) => {
+						if(person._id !== user._id) return <User person = {person} key={id} />
 					})}
 				</CardBody>
 			</Card>

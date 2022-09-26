@@ -18,35 +18,39 @@ const PostCollections = ({ data }) => {
 		liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
 	};
 
-	return (
-		<div className="Post">
-			<img
-				src={
-					data.image
-						? process.env.REACT_APP_PUBLIC_FOLDER + data.image
-						: ""
-				}
-			/>
+	console.log(data);
 
-			<div className="detail">
-				<span>
-					<b>{data.name}</b>{" "}
-				</span>
-				<span>{data.desc}</span>
-			</div>
-			<div className="postReact">
+	return (
+		<div>
+			<div className="Post">
 				<img
-					src={liked ? Like : Unlike}
-					alt=""
-					style={{ cursor: "pointer" }}
-					onClick={handleLike}
+					src={
+						data.image
+							? process.env.REACT_APP_PUBLIC_FOLDER + data.image
+							: ""
+					}
 				/>
-				<img src={Comment} alt="" style={{ cursor: "pointer" }} />
-				<img src={Share} alt="" style={{ cursor: "pointer" }} />
+
+				<div className="detail">
+					<span>
+						<b>{data.name}</b>{" "}
+					</span>
+					<span>{data.desc}</span>
+				</div>
+				<div className="postReact">
+					<img
+						src={liked ? Like : Unlike}
+						alt=""
+						style={{ cursor: "pointer" }}
+						onClick={handleLike}
+					/>
+					<img src={Comment} alt="" style={{ cursor: "pointer" }} />
+					<img src={Share} alt="" style={{ cursor: "pointer" }} />
+				</div>
+				<span style={{ color: "var(--gray)", fontSize: "12px" }}>
+					{likes} likes
+				</span>
 			</div>
-			<span style={{ color: "var(--gray)", fontSize: "12px" }}>
-				{likes} likes
-			</span>
 		</div>
 	);
 };

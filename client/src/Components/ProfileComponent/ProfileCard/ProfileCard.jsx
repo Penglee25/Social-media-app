@@ -11,8 +11,6 @@ const ProfileCard = ({ location }) => {
 	const _PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 	const loading = useSelector((state) => state.authReducers.updateLoading);
 
-	const ProfilePage = false;
-
 	return (
 		<Card className="ProfileCard mt-2">
 			{loading && <Spinners />}
@@ -31,7 +29,7 @@ const ProfileCard = ({ location }) => {
 							? _PUBLIC_FOLDER + user.profilePicture
 							: _PUBLIC_FOLDER + "avatar.png"
 					}
-					alt=""
+					alt="" className="profilePicture"
 				/>
 			</div>
 			<CardBody className="mt-3 text-center">
