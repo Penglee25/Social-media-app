@@ -47,12 +47,18 @@
   .conversation > div {
     position: relative;
   }
+  .chatImage{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
   
   .online-dot {
     background-color: greenyellow;
     border-radius: 50%;
     position: absolute;
-    left: 2rem;
+    left: 2.8rem;
     width: 1rem;
     height: 1rem;
   }

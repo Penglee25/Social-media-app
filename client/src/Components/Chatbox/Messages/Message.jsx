@@ -99,7 +99,7 @@ const Message = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
 												  "defaultProfile.png"
 										}
 										alt="Profile"
-										className="followerImage"
+										className="chatImage"
 										style={{
 											width: "50px",
 											height: "50px",

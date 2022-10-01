@@ -23,7 +23,7 @@ const Conversation = ({ data, currentUser, online }) => {
 
 	return (
 		<>
-			<div className="conversation" style={{ position: 'relative' }}>
+			<div className="follower conversation" style={{ position: 'relative' }}>
 				<div>
 					{online && <div className="online-dot"></div>}
 					<img
@@ -35,8 +35,7 @@ const Conversation = ({ data, currentUser, online }) => {
 								  "avatar.png"
 						}
 						alt="Profile"
-						className="followerImage"
-						style={{ width: "50px", height: "50px" }}
+						className="chatImage"
 					/>
 					<div className="name" style={{ fontSize: "0.8rem" }}>
 						<span>
