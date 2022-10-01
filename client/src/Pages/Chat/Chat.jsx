@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Input } from "reactstrap";
+import { Button } from "reactstrap";
 import { io } from "socket.io-client";
 import { userChats } from "../../Api/ChatRequests";
 import Conversation from "../../Components/Chatbox/Conversation/Conversation";
@@ -71,15 +71,6 @@ const Chat = () => {
 				<LogoSearch />
 				<div className="Chat-container">
 					<h2>Chats</h2>
-
-					<div className="row mt-2">
-						<div className="col-lg px-0">
-							<Input placeholder="Search User"/>
-						</div>
-						<div className="col-lg-auto px-0">
-							<Button className="button" style={{ height: '100%' }}>Search</Button>
-						</div>
-					</div>
 					<div className="Chat-list">
 						{chats.map((chat) => (
 							<div
