@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, CardBody } from "reactstrap";
-import { getAllUser } from "../../../Api/UserRequest";
+import { getAllUser } from "../../../Api/UserRequests";
 import User from "../Users/User";
 import "./FollowersCard.css";
 

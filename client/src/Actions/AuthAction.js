@@ -1,4 +1,4 @@
-import * as AuthApi from "../Api/AuthRequest.js";
+import * as AuthApi from "../Api/AuthRequests.js";
 
 export const logIn = (formData) => async (dispatch) => {
 	dispatch({ type: "AUTH_START" });

@@ -18,8 +18,6 @@ const PostCollections = ({ data }) => {
 		liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
 	};
 
-	console.log(data);
-
 	return (
 		<div>
 			<div className="Post">

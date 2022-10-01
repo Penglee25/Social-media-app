@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Profile from "../src/Pages/Profile/Profile";
 import "./App.css";
 import Auth from "./Pages/Auth/Auth";
+import Chat from "./Pages/Chat/Chat";
 import Home from "./Pages/Home/Home";
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
 				<Route
 					path="/profile/:id"
 					element={user ? <Profile/> : <Navigate to="../auth" />}
+				/>
+				<Route
+					path="/chat"
+					element={user ? <Chat /> : <Navigate to="../auth" />}
 				/>
 			</Routes>
 		</div>

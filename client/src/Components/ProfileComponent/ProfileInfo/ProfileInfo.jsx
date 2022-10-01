@@ -7,7 +7,7 @@ import ProfileModal from "./ProfileModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { logOut } from "../../../Actions/AuthAction";
-import * as UserApi from "../../../Api/UserRequest.js";
+import * as UserApi from "../../../Api/UserRequests.js";
 
 const ProfileInfo = () => {
 	const [modal, setModal] = useState(false);

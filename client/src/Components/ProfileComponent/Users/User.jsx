@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { followUser, unfollowUser } from "../../../Actions/UserAction";
+import { createChat } from "../../../Api/ChatRequests";
 
 const User = (data) => {
 	const dispatch = useDispatch();
@@ -8,16 +9,26 @@ const User = (data) => {
 	const { person } = data;
 	const { user } = useSelector((state) => state.authReducers.authData);
 
+	const initUsersId = {
+		senderId: user._id,
+		receiverId: person._id,
+	};
 	const [following, setFollowing] = useState(
 		person.followers.includes(user._id)
 	);
 
-	const handleFollow = () => {
+	const handleFollow = () => { 
+
+		// handle connect message
+		createChat(initUsersId);
+
+
 		following
 			? dispatch(unfollowUser(person._id, user))
 			: dispatch(followUser(person._id, user));
 		setFollowing((prev) => !prev);
 	};
+
 	return (
 		<div className="followers mt-1">
 			<div className="row">
@@ -40,7 +51,11 @@ const User = (data) => {
 				</div>
 				<div className="col-auto">
 					<button
-						className={following ? "mt-2 UnfollowButton" : "button fc-button mt-2"}
+						className={
+							following
+								? "mt-2 UnfollowButton"
+								: "button fc-button mt-2"
+						}
 						onClick={handleFollow}
 					>
 						{following ? "Unfollow" : "Follow"}
